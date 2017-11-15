@@ -1,6 +1,7 @@
-import {Ingredient} from "../shared/ingredient.model";
-import {EventEmitter, Injectable} from "@angular/core";
-import {LoggingService} from "./logging.service";
+import { Ingredient } from '../shared/ingredient.model';
+import { EventEmitter, Injectable } from '@angular/core';
+import { LoggingService } from './logging.service';
+import { Subject } from 'rxjs/Subject';
 /**
  * Created by orifjon9 on 5/22/2017.
  */
@@ -9,44 +10,44 @@ import {LoggingService} from "./logging.service";
 export class ShoppingListService {
 
   private ingredients: Ingredient[] = [
-    new Ingredient("Meat", 25),
-    new Ingredient("Potatoes", 5),
-    new Ingredient("Tomatoes", 10)
+    new Ingredient('Meat', 25),
+    new Ingredient('Potatoes', 5),
+    new Ingredient('Tomatoes', 10)
   ];
 
   statusRemove = new EventEmitter<string>();
-  ingradientsChanged = new EventEmitter<Ingredient[]>();
+  ingredientsChanged = new Subject<Ingredient[]>();
 
-  constructor(private loggingService: LoggingService){}
+  constructor(private loggingService: LoggingService) { }
 
-  getIngredients(){
+  getIngredients() {
     return this.ingredients.slice();
   }
 
-  addIngredient(ingredient: Ingredient){
+  addIngredient(ingredient: Ingredient) {
     this.ingredients.push(ingredient);
-    this.ingradientsChanged.emit(this.ingredients);
-    this.loggingService.logStatusChanged("addIngredient");
+    this.ingredientsChanged.next(this.ingredients);
+    this.loggingService.logStatusChanged('addIngredient');
   }
 
-  deleteIngredient(ingredient: string){
-    let index = this.ingredients.indexOf(this.ingredients.find(f=>f.name == ingredient));
+  deleteIngredient(ingredient: string) {
+    const index = this.ingredients.indexOf(this.ingredients.find(f => f.name == ingredient));
     this.ingredients.splice(index, 1);
 
-    this.loggingService.logStatusChanged("deleteIngredient");
+    this.loggingService.logStatusChanged('deleteIngredient');
   }
 
-  addIngredients(ingredients: Ingredient[]){
-    for(let ingredient of ingredients){
-      let storeIngredient:Ingredient = this.ingredients.find(i=>i.name == ingredient.name);
-      if(storeIngredient){
-        storeIngredient.amount+=ingredient.amount;
+  addIngredients(ingredients: Ingredient[]) {
+    for (let ingredient of ingredients) {
+      let storeIngredient: Ingredient = this.ingredients.find(i => i.name == ingredient.name);
+      if (storeIngredient) {
+        storeIngredient.amount += ingredient.amount;
       }
-      else{
+      else {
         this.ingredients.push(ingredient);
       }
     }
 
-    this.ingradientsChanged.emit(this.ingredients);
+    this.ingredientsChanged.next(this.ingredients);
   }
 }

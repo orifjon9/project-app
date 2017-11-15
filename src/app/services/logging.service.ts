@@ -4,7 +4,7 @@
 export class LoggingService {
   private logId: number = 0;
 
-  logStatusChanged(status: any){
-    console.log("Logging services was worked: " + status+ ", ID:" + (++this.logId));
+  logStatusChanged(status: any) {
+    console.log("Logging services was worked: " + status + ", ID:" + (++this.logId));
   }
 }

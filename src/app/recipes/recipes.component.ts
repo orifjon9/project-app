@@ -8,15 +8,10 @@ import {RecipeService} from "../services/recipe.service";
   styleUrls: ['./recipes.component.css']
 })
 export class RecipesComponent implements OnInit {
-  currentRecipe: Recipe;
 
-  constructor(private recipeService: RecipeService) { }
+  constructor() { }
 
   ngOnInit() {
-    this.recipeService.selectedRecipeEvent.subscribe((recipe)=> {
-      console.log("recipe defined");
-      this.currentRecipe = recipe;
-    });
   }
 
 }
