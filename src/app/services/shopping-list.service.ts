@@ -17,6 +17,7 @@ export class ShoppingListService {
 
   statusRemove = new EventEmitter<string>();
   ingredientsChanged = new Subject<Ingredient[]>();
+  startedEditing = new Subject<number>();
 
   constructor(private loggingService: LoggingService) { }
 
@@ -24,30 +25,35 @@ export class ShoppingListService {
     return this.ingredients.slice();
   }
 
+  getIngredient(index: number) {
+    return this.ingredients[index];
+  }
+
   addIngredient(ingredient: Ingredient) {
     this.ingredients.push(ingredient);
+    this.notifyAboutChanges('addIngredient');
+  }
+
+  addIngredients(ingredients: Ingredient[]) {
+    this.ingredients.push(...ingredients);
     this.ingredientsChanged.next(this.ingredients);
-    this.loggingService.logStatusChanged('addIngredient');
   }
 
   deleteIngredient(ingredient: string) {
     const index = this.ingredients.indexOf(this.ingredients.find(f => f.name == ingredient));
     this.ingredients.splice(index, 1);
-
-    this.loggingService.logStatusChanged('deleteIngredient');
+    this.notifyAboutChanges('deleteIngredient');
   }
 
-  addIngredients(ingredients: Ingredient[]) {
-    for (let ingredient of ingredients) {
-      let storeIngredient: Ingredient = this.ingredients.find(i => i.name == ingredient.name);
-      if (storeIngredient) {
-        storeIngredient.amount += ingredient.amount;
-      }
-      else {
-        this.ingredients.push(ingredient);
-      }
-    }
+  updateIngredient(index: number, newIngredient: Ingredient) {
+    // this.ingredients.splice(index, 1, ingredient);
+    // or
+    this.ingredients[index] = newIngredient;
+    this.notifyAboutChanges('updateIngredient');
+  }
 
-    this.ingredientsChanged.next(this.ingredients);
+  private notifyAboutChanges(actionName: string) {
+    this.ingredientsChanged.next(this.ingredients.slice());
+    this.loggingService.logStatusChanged(actionName);
   }
 }
