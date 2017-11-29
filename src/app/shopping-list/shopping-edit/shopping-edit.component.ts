@@ -1,6 +1,7 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {Ingredient} from "../../shared/ingredient.model";
-import {ShoppingListService} from "../../services/shopping-list.service";
+import { Component, OnInit } from '@angular/core';
+import { Ingredient } from "../../shared/ingredient.model";
+import { ShoppingListService } from "../../services/shopping-list.service";
+import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -9,30 +10,24 @@ import {ShoppingListService} from "../../services/shopping-list.service";
   styleUrls: ['./shopping-edit.component.css']
 })
 export class ShoppingEditComponent implements OnInit {
-  @ViewChild("inputName") nameReference : ElementRef;
-  @ViewChild("inputAmount") amountReference : ElementRef;
 
   constructor(private slService: ShoppingListService) { }
 
   ngOnInit() {
   }
 
-  onAddIngredient(){
-    const name = this.nameReference.nativeElement.value;
-    const amount = this.amountReference.nativeElement.value;
-    const ing = new Ingredient(name, amount);
+  onAddIngredient(form: NgForm) {
+    const ing = new Ingredient(form.value.name, form.value.amount);
 
     this.slService.addIngredient(ing);
   }
 
-  onDeleteIngredient(){
-    //this.ingredientService.deleteIngredient(this.nameReference.nativeElement.value);
-    //this.loggingService.logStatusChanged("delete")
-    this.slService.statusRemove.emit(this.nameReference.nativeElement.value);
+  onDeleteIngredient(form: NgForm) {
+    console.log(form.value);
+    this.slService.deleteIngredient(form.value.name);
   }
 
-  onClear(){
-    this.nameReference.nativeElement.value = '';
-    this.amountReference.nativeElement.value = '0';
+  onClear(form: NgForm) {
+    form.reset();
   }
 }
