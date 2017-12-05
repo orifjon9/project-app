@@ -3,7 +3,7 @@
         <form [formGroup]="editForm" (ngSubmit)="onSubmit()">
             <div class="row">
                 <div class="col-xs-12">
-                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="submit" class="btn btn-success" [disabled]="!editForm.valid">Save</button>
                     <button type="button" class="btn btn-danger">Cancel</button>
                 </div>
             </div>
@@ -40,8 +40,8 @@
             <hr>
             <div class="row">
                 <div class="col-xs-12" formArrayName="ingredients">
-                    <div class="row" *ngFor="let ingredientsContr of editForm.get('ingredients').controls; let i = index">
-                        <div class="col-xs-12" [formGroupName]="i">
+                    <div *ngFor="let ingredientsContr of editForm.get('ingredients').controls; let i = index" style="margin-bottom:10px;">
+                        <div [formGroupName]="i">
                             <div class="col-xs-8">
                                 <input type="text" formControlName="name" class="form-control">
                             </div>
@@ -53,6 +53,15 @@
                             </div>
                         </div>
                     </div>
+
+
+                </div>
+
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-xs-12">
+                    <button class="btn btn-success" (click)="onAddIngredient()">Add ingredient</button>
                 </div>
             </div>
         </form>
