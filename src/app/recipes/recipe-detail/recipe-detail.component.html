@@ -1,45 +1,41 @@
 <div class="row">
-  <div class="col-xs-12">
-    <img
-          [src]="recipeDetails.imagePath"
-          alt="{{recipeDetails.name}}"
-          class="img-responsive"
-          style="max-width: 400px;">
-  </div>
+    <div class="col-xs-12">
+        <img [src]="recipeDetails.imagePath" alt="{{recipeDetails.name}}" class="img-responsive" style="max-width: 400px;">
+    </div>
 </div>
 <div class="row">
-  <div class="col-xs-12">
-    <h1>{{recipeDetails.name}}</h1>
-  </div>
+    <div class="col-xs-12">
+        <h1>{{recipeDetails.name}}</h1>
+    </div>
 </div>
 <div class="row">
-  <div class="col-xs-12">
-    <div class="btn-group open" appDropdown>
-      <button type="button" class="btn btn-primary dropdown-toggle">
+    <div class="col-xs-12">
+        <div class="btn-group open" appDropdown>
+            <button type="button" class="btn btn-primary dropdown-toggle">
         Manage recipe <span class="caret"></span>
       </button>
-      <ul class="dropdown-menu">
-        <li><a style="cursor: pointer" (click)="OnAddShoppingList()">To Shopping List</a></li>
-        <li><a style="cursor:pointer" (click)="onEditRecipe()">Edit recipe</a></li>
-        <li><a style="cursor:pointer">Delete recipe</a></li>
-      </ul>
+            <ul class="dropdown-menu">
+                <li><a style="cursor: pointer" (click)="OnAddShoppingList()">To Shopping List</a></li>
+                <li><a style="cursor:pointer" (click)="onEditRecipe()">Edit recipe</a></li>
+                <li><a style="cursor:pointer" (click)="onDeleteRecipe()">Delete recipe</a></li>
+            </ul>
+        </div>
     </div>
-  </div>
 </div>
 
 <div class="row">
-  <div class="col-xs-12">
-    {{recipeDetails.description}}
-  </div>
+    <div class="col-xs-12">
+        {{recipeDetails.description}}
+    </div>
 </div>
 
 <hr>
 <div class="row">
-  <div class="col-xs-12">
-    <ul class="list-group">
-      <li class="list-group-item" *ngFor="let ingredient of recipeDetails.ingredients">
-        {{ingredient.name}} - {{ingredient.amount}}
-      </li>
-    </ul>
-  </div>
+    <div class="col-xs-12">
+        <ul class="list-group">
+            <li class="list-group-item" *ngFor="let ingredient of recipeDetails.ingredients">
+                {{ingredient.name}} - {{ingredient.amount}}
+            </li>
+        </ul>
+    </div>
 </div>
