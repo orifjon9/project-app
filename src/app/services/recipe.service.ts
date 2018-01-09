@@ -4,10 +4,15 @@ import { Recipe } from '../shared/recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from './shopping-list.service';
 import { Subject } from 'rxjs/Subject';
+import { Http, Response } from '@angular/http';
+import 'rxjs/Rx';
 
 @Injectable()
 export class RecipeService {
-  private recipes: Recipe[] = [
+  private baseApiUrl = 'https://orif-recipe-book.firebaseio.com/recipe.json';
+
+  private recipes: Recipe[] = [];
+  /*private recipes: Recipe[] = [
     new Recipe('Test a recipe', 'This is a test recipe!',
       'http://www.seriouseats.com/images/2017/02/20170228-pressure-cooker-recipes-roundup-collage.jpg',
       [
@@ -23,10 +28,11 @@ export class RecipeService {
         new Ingredient('Potatoes', 3),
       ])
   ];
-
+*/
   recipeChangeEvent = new Subject<Recipe[]>();
 
-  constructor(private slService: ShoppingListService) { }
+  constructor(private slService: ShoppingListService,
+    private http: Http) { }
 
   getRecipes() {
     return this.recipes.slice();
@@ -38,6 +44,11 @@ export class RecipeService {
 
   addRecipe(recipe: Recipe) {
     this.recipes.push(recipe);
+    this.recipeChangeEvent.next(this.getRecipes());
+  }
+
+  addRecipes(recipes: Recipe[]) {
+    this.recipes.push(...recipes);
     this.recipeChangeEvent.next(this.getRecipes());
   }
 
@@ -55,4 +66,21 @@ export class RecipeService {
     this.slService.addIngredients(ingredients);
   }
 
+  save() {
+    return this.http.put(this.baseApiUrl, this.recipes)
+      .map((response: Response) => {
+        return response.ok;
+      });
+  }
+
+  load() {
+    return this.http.get(this.baseApiUrl)
+      .map((response: Response) => {
+        if (response.ok) {
+          const recipes = response.json() as Recipe[];
+
+          this.addRecipes(recipes);
+        }
+      });
+  }
 }
