@@ -1,13 +1,16 @@
 import { NgModule } from "@angular/core";
-import {RouterModule, Routes} from "@angular/router";
+import { RouterModule, Routes } from "@angular/router";
 import { RecipesComponent } from "./recipes/recipes.component";
 import { ShoppingListComponent } from "./shopping-list/shopping-list.component";
-import {RecipeStartComponent} from "./recipes/recipe-start/recipe-start.component";
-import {RecipeDetailComponent} from "./recipes/recipe-detail/recipe-detail.component";
-import {RecipeEditComponent} from "./recipes/recipe-edit/recipe-edit.component";
+import { RecipeStartComponent } from "./recipes/recipe-start/recipe-start.component";
+import { RecipeDetailComponent } from "./recipes/recipe-detail/recipe-detail.component";
+import { RecipeEditComponent } from "./recipes/recipe-edit/recipe-edit.component";
+import { SignupComponent } from "app/auth/signup/signup.component";
+import { SigninComponent } from "app/auth/signin/signin.component";
+import { AuthGuard } from "app/auth/auth-guard";
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/recipes', pathMatch:'full' },
+  { path: '', redirectTo: '/recipes', pathMatch: 'full' },
   {
     path: 'recipes', component: RecipesComponent,
     children: [
@@ -15,9 +18,12 @@ const appRoutes: Routes = [
       { path: 'new', component: RecipeEditComponent },
       { path: ':id', component: RecipeDetailComponent },
       { path: ':id/edit', component: RecipeEditComponent }
-    ]
+    ],
+    canActivateChild: [AuthGuard]
   },
-  { path: 'shopping-list', component: ShoppingListComponent }
+  { path: 'shopping-list', component: ShoppingListComponent, canActivate: [AuthGuard] },
+  { path: 'signup', component: SignupComponent },
+  { path: 'signin', component: SigninComponent }
 ];
 
 @NgModule({
