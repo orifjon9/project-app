@@ -18,13 +18,12 @@ import { AuthService } from 'app/auth/auth.service';
 import { AuthGuard } from 'app/auth/auth-guard';
 import { RecipesModule } from 'app/recipes/recipes.module';
 import { SharedModule } from 'app/shared/shared.module';
+import { ShoppingListModule } from 'app/shopping-list/shopping-list.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    ShoppingListComponent,
-    ShoppingEditComponent,
     SignupComponent,
     SigninComponent
   ],
@@ -35,6 +34,7 @@ import { SharedModule } from 'app/shared/shared.module';
     AppRoutingModule,
     ReactiveFormsModule,
     RecipesModule,
+    ShoppingListModule,
     SharedModule
   ],
   providers: [LoggingService, ShoppingListService, RecipeService, AuthService, AuthGuard],
