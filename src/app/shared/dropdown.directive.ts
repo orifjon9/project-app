@@ -6,7 +6,6 @@ import { Directive, ElementRef, HostBinding, HostListener, OnInit } from '@angul
 @Directive({
   selector: '[appDropdown]'
 })
-
 export class DropDownDirective {
   @HostBinding('class.open') isOpen = false;
 

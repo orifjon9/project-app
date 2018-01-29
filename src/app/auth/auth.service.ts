@@ -1,5 +1,4 @@
 import * as firebase from 'firebase';
-import { CombineLatestOperator } from 'rxjs/operators/combineLatest';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 
