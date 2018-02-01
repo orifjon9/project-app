@@ -5,6 +5,7 @@ import { Ingredient } from '../shared/ingredient.model';
 import { Subscription } from 'rxjs/Subscription';
 import { RecipeService } from 'app/services/recipe.service';
 import { AuthService } from 'app/auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -17,7 +18,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(private slService: ShoppingListService,
     private recipeService: RecipeService,
-    public authService: AuthService) { }
+    public authService: AuthService,
+    private router: Router) { }
 
   ngOnInit() {
     this.subscription = this.slService.ingredientsChanged
@@ -40,5 +42,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   onLogout() {
     this.authService.signOut();
+    this.router.navigate(['/signin']);
   }
 }

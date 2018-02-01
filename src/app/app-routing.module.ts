@@ -10,9 +10,7 @@ import { SigninComponent } from "app/auth/signin/signin.component";
 import { AuthGuard } from "app/auth/auth-guard";
 
 const appRoutes: Routes = [
-  { path: '', redirectTo: '/recipes', pathMatch: 'full' },
-  { path: 'signup', component: SignupComponent },
-  { path: 'signin', component: SigninComponent }
+  { path: '', redirectTo: '/recipes', pathMatch: 'full' }
 ];
 
 @NgModule({
