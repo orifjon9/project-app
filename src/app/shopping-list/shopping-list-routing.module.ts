@@ -9,7 +9,7 @@ import { ShoppingEditComponent } from "app/shopping-list/shopping-edit/shopping-
 
 const shoppingListRoutes: Routes = [
     {
-        path: 'shopping-list', component: ShoppingListComponent,
+        path: '', component: ShoppingListComponent,
         canActivate: [AuthGuard],
         children: [
             { path: ':id/edit', component: ShoppingEditComponent }
