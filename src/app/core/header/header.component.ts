@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output, OnDestroy } from '@angular/core';
-import { ShoppingListService } from '../services/shopping-list.service';
-import { Ingredient } from '../shared/ingredient.model';
+import { ShoppingListService } from 'app/services/shopping-list.service';
+import { Ingredient } from 'app/shared/ingredient.model';
 
 import { Subscription } from 'rxjs/Subscription';
 import { RecipeService } from 'app/services/recipe.service';
