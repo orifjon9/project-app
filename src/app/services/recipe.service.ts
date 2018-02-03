@@ -4,9 +4,9 @@ import { Recipe } from '../shared/recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from './shopping-list.service';
 import { Subject } from 'rxjs/Subject';
-import { Http, Response } from '@angular/http';
 import 'rxjs/Rx';
 import { AuthService } from 'app/auth/auth.service';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable()
 export class RecipeService {
@@ -16,7 +16,7 @@ export class RecipeService {
   recipeChangeEvent = new Subject<Recipe[]>();
 
   constructor(private slService: ShoppingListService,
-    private http: Http,
+    private httpClient: HttpClient,
     private authService: AuthService) { }
 
   getRecipes() {
@@ -52,20 +52,17 @@ export class RecipeService {
   }
 
   save() {
-    return this.http.put(this.baseApiUrl + '?auth=' + this.authService.getToken(), this.recipes)
-      .map((response: Response) => {
-        return response.ok;
+    return this.httpClient.put(this.baseApiUrl + '?auth=' + this.authService.getToken(), this.recipes)
+      .map((response: Recipe[]) => {
+        return (response ? true : false);
       });
   }
 
   load() {
-    return this.http.get(this.baseApiUrl + '?auth=' + this.authService.getToken())
-      .map((response: Response) => {
-        if (response.ok) {
-          const recipes = response.json() as Recipe[];
-          this.recipes = [];
-          this.addRecipes(recipes);
-        }
+    return this.httpClient.get<Recipe[]>(this.baseApiUrl + '?auth=' + this.authService.getToken())
+      .map(recipes => {
+        this.recipes = [];
+        this.addRecipes(recipes);
       });
   }
 }
