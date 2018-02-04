@@ -61,8 +61,7 @@ export class RecipeService {
       });*/
 
     const request = new HttpRequest('PUT', this.baseApiUrl, this.recipes, {
-      reportProgress: true,
-      params: new HttpParams().set('auth', this.authService.getToken())
+      reportProgress: true
     });
 
     return this.httpClient.request(request);
@@ -73,7 +72,6 @@ export class RecipeService {
       {
         observe: 'body', // default, you can change it to response if you need get whole response info, events:
         responseType: 'json', // default, you can change it to any parameter
-        params: new HttpParams().set('auth', this.authService.getToken())
       })
       .map(recipes => {
         this.recipes = [];
