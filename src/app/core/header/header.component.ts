@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   onSaveRecipes() {
     this.recipeService.save().subscribe((result) => {
-
+      console.log(result);
     });
   }
 

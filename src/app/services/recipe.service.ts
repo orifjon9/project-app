@@ -6,7 +6,7 @@ import { ShoppingListService } from './shopping-list.service';
 import { Subject } from 'rxjs/Subject';
 import 'rxjs/Rx';
 import { AuthService } from 'app/auth/auth.service';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpRequest } from '@angular/common/http';
 
 @Injectable()
 export class RecipeService {
@@ -52,14 +52,29 @@ export class RecipeService {
   }
 
   save() {
-    return this.httpClient.put(this.baseApiUrl + '?auth=' + this.authService.getToken(), this.recipes)
+    /*return this.httpClient.put(this.baseApiUrl, this.recipes, {
+      observe: 'body',
+      params: new HttpParams().set('auth', this.authService.getToken())
+    })
       .map((response: Recipe[]) => {
         return (response ? true : false);
-      });
+      });*/
+
+    const request = new HttpRequest('PUT', this.baseApiUrl, this.recipes, {
+      reportProgress: true,
+      params: new HttpParams().set('auth', this.authService.getToken())
+    });
+
+    return this.httpClient.request(request);
   }
 
   load() {
-    return this.httpClient.get<Recipe[]>(this.baseApiUrl + '?auth=' + this.authService.getToken())
+    return this.httpClient.get<Recipe[]>(this.baseApiUrl,
+      {
+        observe: 'body', // default, you can change it to response if you need get whole response info, events:
+        responseType: 'json', // default, you can change it to any parameter
+        params: new HttpParams().set('auth', this.authService.getToken())
+      })
       .map(recipes => {
         this.recipes = [];
         this.addRecipes(recipes);
