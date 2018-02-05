@@ -6,7 +6,6 @@ import 'rxjs/Rx';
 
 import { Recipe } from '../shared/recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
-import { ShoppingListService } from './shopping-list.service';
 import { AuthService } from 'app/auth/auth.service';
 import * as ShoppingListActions from '../_store/shopping-list.actions';
 

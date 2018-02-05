@@ -1,11 +1,12 @@
 import { Component, EventEmitter, OnInit, Output, OnDestroy } from '@angular/core';
-import { ShoppingListService } from 'app/services/shopping-list.service';
-import { Ingredient } from 'app/shared/ingredient.model';
-
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import { Store } from '@ngrx/store';
+
+import { Ingredient } from 'app/shared/ingredient.model';
 import { RecipeService } from 'app/services/recipe.service';
 import { AuthService } from 'app/auth/auth.service';
-import { Router } from '@angular/router';
+import { AppState } from '../../_store/app-state.interface';
 
 @Component({
   selector: 'app-header',
@@ -16,14 +17,15 @@ export class HeaderComponent implements OnInit, OnDestroy {
   numberIngredients = 0;
   private subscription: Subscription;
 
-  constructor(private slService: ShoppingListService,
+  constructor(private store: Store<AppState>,
     private recipeService: RecipeService,
     public authService: AuthService,
     private router: Router) { }
 
   ngOnInit() {
-    this.subscription = this.slService.ingredientsChanged
-      .subscribe((ingredients: Ingredient[]) => this.numberIngredients = ingredients.length);
+    this.subscription = this.store.select('shoppingList')
+      .subscribe(
+      data => this.numberIngredients = data.ingredients.length);
   }
 
   ngOnDestroy() {

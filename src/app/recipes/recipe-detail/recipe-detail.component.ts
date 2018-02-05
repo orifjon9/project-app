@@ -6,7 +6,7 @@ import { Recipe } from "../../shared/recipe.model";
 import { RecipeService } from "../../services/recipe.service";
 import * as ShoppingListActions from '../../_store/shopping-list.actions';
 import { Ingredient } from 'app/shared/ingredient.model';
-import * as fromShoppingList from '../../_store/shopping-list.reducers';
+import { AppState } from '../../_store/app-state.interface';
 
 @Component({
   selector: 'app-recipe-detail',
@@ -20,7 +20,7 @@ export class RecipeDetailComponent implements OnInit {
   constructor(private recipeService: RecipeService,
     private route: ActivatedRoute,
     private router: Router,
-    private store: Store<fromShoppingList.AppState>) {
+    private store: Store<AppState>) {
 
     this.route.params.subscribe((param: Params) => {
       this.id = +param['id'];

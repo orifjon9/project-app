@@ -4,7 +4,6 @@ import { HomeComponent } from 'app/core/home/home.component';
 import { HeaderComponent } from 'app/core/header/header.component';
 import { AppRoutingModule } from 'app/app-routing.module';
 import { SharedModule } from 'app/shared/shared.module';
-import { ShoppingListService } from 'app/services/shopping-list.service';
 import { LoggingService } from 'app/services/logging.service';
 import { RecipeService } from 'app/services/recipe.service';
 import { AuthService } from 'app/auth/auth.service';
@@ -25,7 +24,6 @@ import { LoggingInterceptor } from 'app/shared/logging.interceptor';
         HeaderComponent],
     providers: [
         LoggingService,
-        ShoppingListService,
         RecipeService,
         AuthService,
         AuthGuard,
