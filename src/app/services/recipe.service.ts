@@ -1,12 +1,14 @@
 import { EventEmitter, Injectable } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { HttpClient, HttpParams, HttpRequest } from '@angular/common/http';
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/Rx';
 
 import { Recipe } from '../shared/recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
 import { ShoppingListService } from './shopping-list.service';
-import { Subject } from 'rxjs/Subject';
-import 'rxjs/Rx';
 import { AuthService } from 'app/auth/auth.service';
-import { HttpClient, HttpParams, HttpRequest } from '@angular/common/http';
+import * as ShoppingListActions from '../_store/shopping-list.actions';
 
 @Injectable()
 export class RecipeService {
@@ -15,8 +17,7 @@ export class RecipeService {
   private recipes: Recipe[] = [];
   recipeChangeEvent = new Subject<Recipe[]>();
 
-  constructor(private slService: ShoppingListService,
-    private httpClient: HttpClient,
+  constructor(private httpClient: HttpClient,
     private authService: AuthService) { }
 
   getRecipes() {
@@ -45,10 +46,6 @@ export class RecipeService {
   deleteRecipe(index: number) {
     this.recipes.splice(index, 1);
     this.recipeChangeEvent.next(this.getRecipes());
-  }
-
-  addIngredientsToShoppingList(ingredients: Ingredient[]) {
-    this.slService.addIngredients(ingredients);
   }
 
   save() {
