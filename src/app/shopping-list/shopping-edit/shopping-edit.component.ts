@@ -9,8 +9,8 @@ import { Subscription } from 'rxjs/Subscription';
 import { Store } from '@ngrx/store';
 
 import { Ingredient } from '../../shared/ingredient.model';
-import * as ShoppingListActions from '../../_store/shopping-list.actions';
-import { AppState } from '../../_store/app-state.interface';
+import * as ShoppingListActions from '../store/shopping-list.actions';
+import { AppState } from 'app/store/app.reducers';
 
 @Component({
   selector: 'app-shopping-edit',
@@ -19,12 +19,13 @@ import { AppState } from '../../_store/app-state.interface';
 })
 export class ShoppingEditComponent implements OnInit, OnDestroy {
   editMode = false;
+  subscription: Subscription;
   @ViewChild('f') slForm: NgForm;
 
   constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
-    this.store.select('shoppingList')
+    this.subscription = this.store.select('shoppingList')
       .subscribe(data => {
         if (data.editedIngredient != null) {
           this.editMode = true;
@@ -35,6 +36,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.store.dispatch(new ShoppingListActions.StopEdit());
+    this.subscription.unsubscribe();
   }
 
   onAddOrUpdateIngredient(form: NgForm) {

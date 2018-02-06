@@ -1,7 +1,7 @@
 import * as ShoppingListActions from './shopping-list.actions';
 
 import { Ingredient } from 'app/shared/ingredient.model';
-import { State } from 'app/_store/state.interface';
+import { State } from './state.interface';
 
 const initialState: State = {
     ingredients: [
@@ -37,7 +37,9 @@ export function shoppingListReducer(state = initialState, action: ShoppingListAc
             ingredients[state.editedIngredientIndex] = upgradedIngredient;
             return {
                 ...state,
-                ingredients: ingredients
+                ingredients: ingredients,
+                editedIngredient: null,
+                editedIngredientIndex: -1
             };
         }
         case ShoppingListActions.DELETE_INGREDIENT: {
@@ -45,7 +47,9 @@ export function shoppingListReducer(state = initialState, action: ShoppingListAc
             ingredients.splice(state.editedIngredientIndex, 1);
             return {
                 ...state,
-                ingredients: ingredients
+                ingredients: ingredients,
+                editedIngredient: null,
+                editedIngredientIndex: -1
             };
         }
         case ShoppingListActions.START_EDITING: {

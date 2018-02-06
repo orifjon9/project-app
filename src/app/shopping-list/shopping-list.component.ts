@@ -3,8 +3,8 @@ import { Ingredient } from '../shared/ingredient.model';
 import { Subscription } from 'rxjs/Subscription';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
-import { AppState } from '../_store/app-state.interface';
-import * as ShoppingListActions from '../_store/shopping-list.actions';
+import * as ShoppingListActions from './store/shopping-list.actions';
+import { AppState } from 'app/store/app.reducers';
 
 @Component({
   selector: 'app-shopping-list',

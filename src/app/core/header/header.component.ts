@@ -2,11 +2,13 @@ import { Component, EventEmitter, OnInit, Output, OnDestroy } from '@angular/cor
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs/Observable';
 
 import { Ingredient } from 'app/shared/ingredient.model';
 import { RecipeService } from 'app/services/recipe.service';
 import { AuthService } from 'app/auth/auth.service';
-import { AppState } from '../../_store/app-state.interface';
+import { AppState } from 'app/store/app.reducers';
+import * as fromAuth from 'app/auth/store/state.interface';
 
 @Component({
   selector: 'app-header',
@@ -15,17 +17,19 @@ import { AppState } from '../../_store/app-state.interface';
 
 export class HeaderComponent implements OnInit, OnDestroy {
   numberIngredients = 0;
+  authState: Observable<fromAuth.State>;
   private subscription: Subscription;
 
   constructor(private store: Store<AppState>,
-    private recipeService: RecipeService,
-    public authService: AuthService,
-    private router: Router) { }
+              private recipeService: RecipeService,
+              public authService: AuthService,
+              private router: Router) { }
 
   ngOnInit() {
     this.subscription = this.store.select('shoppingList')
       .subscribe(
       data => this.numberIngredients = data.ingredients.length);
+      this.authState = this.store.select('auth');
   }
 
   ngOnDestroy() {

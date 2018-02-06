@@ -7,7 +7,7 @@ import 'rxjs/Rx';
 import { Recipe } from '../shared/recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
 import { AuthService } from 'app/auth/auth.service';
-import * as ShoppingListActions from '../_store/shopping-list.actions';
+import * as ShoppingListActions from '../shopping-list/store/shopping-list.actions';
 
 @Injectable()
 export class RecipeService {
