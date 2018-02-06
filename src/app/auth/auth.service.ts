@@ -8,7 +8,6 @@ import * as fromAuth from '../../app/auth/store/auth.actions';
 
 @Injectable()
 export class AuthService {
-    private token: string = null;
 
     constructor(private router: Router,
                 private store: Store<AppState>) { }
@@ -17,6 +16,7 @@ export class AuthService {
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then((response: any) => {
                 this.store.dispatch(new fromAuth.Signup());
+                this.setToken();
             })
             .catch(error => console.log(error));
     }
@@ -25,7 +25,7 @@ export class AuthService {
         firebase.auth().signInWithEmailAndPassword(email, password)
             .then(response => {
                 this.store.dispatch(new fromAuth.Signin());
-                this.getToken();
+                this.setToken();
                 this.router.navigate(['/']);
             })
             .catch(error => console.log(error));
@@ -34,19 +34,12 @@ export class AuthService {
     signOut() {
         firebase.auth().signOut();
         this.store.dispatch(new fromAuth.Logout());
-        this.token = null;
     }
 
-    getToken() {
-        firebase.auth().currentUser.getToken()
+    private setToken() {
+        firebase.auth().currentUser.getIdToken()
             .then(tk => {
-                this.token = tk;
                 this.store.dispatch(new fromAuth.SetToken(tk));
             });
-        return this.token;
-    }
-
-    isAuthenticated() {
-        return this.token != null;
     }
 }
