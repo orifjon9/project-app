@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
+import { EffectsModule } from '@ngrx/effects';
 
 import { AppComponent } from './app.component';
 import { DropDownDirective } from './shared/dropdown.directive';
@@ -14,6 +15,7 @@ import { AuthModule } from 'app/auth/auth.module';
 import { CoreModule } from 'app/core/core.module';
 import { shoppingListReducer } from 'app/shopping-list/store/shopping-list.reducers';
 import { reducers } from 'app/store/app.reducers';
+import { AuthEffects } from 'app/auth/auth.effects';
 
 @NgModule({
   declarations: [
@@ -28,7 +30,8 @@ import { reducers } from 'app/store/app.reducers';
     AuthModule,
     SharedModule,
     CoreModule,
-    StoreModule.forRoot(reducers)
+    StoreModule.forRoot(reducers),
+    EffectsModule.forRoot([AuthEffects])
   ],
   bootstrap: [AppComponent]
 })
