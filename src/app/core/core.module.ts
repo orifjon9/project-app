@@ -6,7 +6,6 @@ import { AppRoutingModule } from 'app/app-routing.module';
 import { SharedModule } from 'app/shared/shared.module';
 import { LoggingService } from 'app/services/logging.service';
 import { RecipeService } from 'app/services/recipe.service';
-import { AuthService } from 'app/auth/auth.service';
 import { AuthGuard } from 'app/auth/auth-guard';
 import { AuthInterceptor } from 'app/shared/auth.interceptor';
 import { LoggingInterceptor } from 'app/shared/logging.interceptor';
@@ -25,7 +24,6 @@ import { LoggingInterceptor } from 'app/shared/logging.interceptor';
     providers: [
         LoggingService,
         RecipeService,
-        AuthService,
         AuthGuard,
         { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: LoggingInterceptor, multi: true }

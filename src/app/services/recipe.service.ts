@@ -6,7 +6,6 @@ import 'rxjs/Rx';
 
 import { Recipe } from '../shared/recipe.model';
 import { Ingredient } from '../shared/ingredient.model';
-import { AuthService } from 'app/auth/auth.service';
 import * as ShoppingListActions from '../shopping-list/store/shopping-list.actions';
 
 @Injectable()
@@ -16,8 +15,7 @@ export class RecipeService {
   private recipes: Recipe[] = [];
   recipeChangeEvent = new Subject<Recipe[]>();
 
-  constructor(private httpClient: HttpClient,
-    private authService: AuthService) { }
+  constructor(private httpClient: HttpClient) { }
 
   getRecipes() {
     return this.recipes.slice();

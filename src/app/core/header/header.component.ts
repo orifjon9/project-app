@@ -6,9 +6,9 @@ import { Observable } from 'rxjs/Observable';
 
 import { Ingredient } from 'app/shared/ingredient.model';
 import { RecipeService } from 'app/services/recipe.service';
-import { AuthService } from 'app/auth/auth.service';
 import { AppState } from 'app/store/app.reducers';
 import * as fromAuth from 'app/auth/store/state.interface';
+import * as fromAuthActions from 'app/auth/store/auth.actions';
 
 @Component({
   selector: 'app-header',
@@ -22,7 +22,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   constructor(private store: Store<AppState>,
               private recipeService: RecipeService,
-              public authService: AuthService,
               private router: Router) { }
 
   ngOnInit() {
@@ -47,7 +46,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onLogout() {
-    this.authService.signOut();
-    this.router.navigate(['/signin']);
+    this.store.dispatch(new fromAuthActions.Logout());
   }
 }

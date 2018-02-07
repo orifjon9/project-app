@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Effect } from '@ngrx/effects';
 import { Actions } from '@ngrx/effects';
+import * as firebase from 'firebase';
+import { Router } from '@angular/router';
 
 import * as AuthActions from '../auth/store/auth.actions';
 import { fromPromise } from 'rxjs/observable/fromPromise';
-import * as firebase from 'firebase';
 
 @Injectable()
 export class AuthEffects {
@@ -22,6 +23,7 @@ export class AuthEffects {
             return fromPromise(firebase.auth().currentUser.getIdToken());
         })
         .mergeMap((token: string) => {
+            this.router.navigate(['/']);
             return [
                 {
                     type: AuthActions.SIGNUP
@@ -46,6 +48,7 @@ export class AuthEffects {
             return fromPromise(firebase.auth().currentUser.getIdToken());
         })
         .mergeMap((token: string) => {
+            this.router.navigate(['/']);
             return [
                 {
                     type: AuthActions.SIGNIN
@@ -57,5 +60,12 @@ export class AuthEffects {
             ];
         });
 
-    constructor(private actions$: Actions) { }
+    @Effect({ dispatch: false })
+    authLogOut = this.actions$
+        .ofType(AuthActions.LOGOUT)
+        .do(() => {
+            this.router.navigate(['/']);
+        });
+
+    constructor(private actions$: Actions, private router: Router) { }
 }

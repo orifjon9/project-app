@@ -19,6 +19,8 @@ export class AuthGuard implements CanActivate, CanActivateChild {
     }
 
     private isAuthenticated() {
-        return this.store.select('auth').map((authState: fromAuthState.State) => authState.isAuthenticated);
+        return this.store.select('auth')
+            .take(1)
+            .map((authState: fromAuthState.State) => authState.isAuthenticated);
     }
 }
