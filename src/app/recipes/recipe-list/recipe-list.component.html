@@ -8,10 +8,7 @@
 <hr>
 <div class="row">
     <div class="col-xs-12">
-      <app-recipe-item *ngFor="let recipeEL of recipes;let i = index;"
-                       [recipe]="recipeEL"
-                       [index] = "i">
-      </app-recipe-item>
+        <app-recipe-item *ngFor="let recipeEL of (recipeState | async).recipes;let i = index;" [recipe]="recipeEL" [index]="i">
+        </app-recipe-item>
     </div>
 </div>
-
