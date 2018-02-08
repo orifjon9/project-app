@@ -33,3 +33,5 @@ app.get('*', angularRouter);
 app.listen(3000, () => {
     console.log('Listening on port 3000');
 });
+
+// https://github.com/angular/angular-cli/wiki/stories-universal-rendering
