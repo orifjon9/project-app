@@ -77,6 +77,10 @@ export class RecipeEditComponent implements OnInit {
     }));
   }
 
+  getIngrdients() {
+    return (<FormArray>this.editForm.get('ingredients')).controls;
+  }
+
   onSubmit() {
     console.log(this.editForm.value);
     if (this.editMode) {
