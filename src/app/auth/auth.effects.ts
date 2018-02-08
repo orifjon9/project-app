@@ -3,13 +3,15 @@ import { Effect } from '@ngrx/effects';
 import { Actions } from '@ngrx/effects';
 import * as firebase from 'firebase';
 import { Router } from '@angular/router';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/mergeMap';
 
 import * as AuthActions from '../auth/store/auth.actions';
 import { fromPromise } from 'rxjs/observable/fromPromise';
 
 @Injectable()
 export class AuthEffects {
-    // @Effect({ dispatch: false})  if actions dont effect to another action, mark as dispatch false
     @Effect()
     authSignup = this.actions$
         .ofType(AuthActions.TRY_SIGNUP)
@@ -60,7 +62,7 @@ export class AuthEffects {
             ];
         });
 
-    @Effect({ dispatch: false })
+    @Effect({ dispatch: false }) // if actions dont effect to another action, mark as dispatch false
     authLogOut = this.actions$
         .ofType(AuthActions.LOGOUT)
         .do(() => {

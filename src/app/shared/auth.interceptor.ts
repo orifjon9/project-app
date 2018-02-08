@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Store } from '@ngrx/store';
 import 'rxjs/add/operator/switchMap';
+import 'rxjs/add/operator/take';
 
 import * as fromApp from 'app/store/app.reducers';
 import * as fromAuth from 'app/auth/store/state.interface';

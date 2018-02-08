@@ -4,7 +4,6 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
 import { Recipe } from 'app/shared/recipe.model';
-import { RecipeService } from '../../services/recipe.service';
 import { RecipeState, State } from 'app/recipes/store/state.interface';
 
 

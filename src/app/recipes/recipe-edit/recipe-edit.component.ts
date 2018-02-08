@@ -78,15 +78,9 @@ export class RecipeEditComponent implements OnInit {
   }
 
   onSubmit() {
-    const recipe = new Recipe(
-      this.editForm.value['name'],
-      this.editForm.value['description'],
-      this.editForm.value['imagePath'],
-      this.editForm.value['ingredients']
-    );
-
+    console.log(this.editForm.value);
     if (this.editMode) {
-      this.store.dispatch(new fromRecipeActions.UpdateRecipe({ index: this.id, updatedRecipe: recipe }));
+      this.store.dispatch(new fromRecipeActions.UpdateRecipe({ index: this.id, updatedRecipe: this.editForm.value }));
     } else {
       this.store.dispatch(new fromRecipeActions.AddRecipe(this.editForm.value));
     }

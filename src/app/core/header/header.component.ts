@@ -5,10 +5,10 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import { Ingredient } from 'app/shared/ingredient.model';
-import { RecipeService } from 'app/services/recipe.service';
 import { AppState } from 'app/store/app.reducers';
 import * as fromAuth from 'app/auth/store/state.interface';
 import * as fromAuthActions from 'app/auth/store/auth.actions';
+import * as fromRecipeActions from '../../recipes/store/recipe.actions';
 
 @Component({
   selector: 'app-header',
@@ -21,7 +21,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   constructor(private store: Store<AppState>,
-              private recipeService: RecipeService,
               private router: Router) { }
 
   ngOnInit() {
@@ -36,13 +35,11 @@ export class HeaderComponent implements OnInit, OnDestroy {
   }
 
   onSaveRecipes() {
-    this.recipeService.save().subscribe((result) => {
-      console.log(result);
-    });
+    this.store.dispatch(new fromRecipeActions.SaveRecipes());
   }
 
   onLoadRecipes() {
-    this.recipeService.load().subscribe();
+    this.store.dispatch(new fromRecipeActions.FetchRecipes());
   }
 
   onLogout() {

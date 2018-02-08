@@ -25,13 +25,14 @@ export function recipeReducers(state = initState, action: fromRecipeActions.Reci
             };
         }
         case fromRecipeActions.UPDATE_RECIPE: {
+            console.log(action.payload);
             const recipe = state.recipes[action.payload.index];
-            const upgratedRecipe = {
+            const upgradedRecipe = {
                 ...recipe,
                 ...action.payload.updatedRecipe
             };
-            const recipes = state.recipes;
-            recipe[action.payload.index] = upgratedRecipe;
+            const recipes = [...state.recipes];
+            recipe[action.payload.index] = upgradedRecipe;
             return {
                 ...state,
                 recipes: recipes
