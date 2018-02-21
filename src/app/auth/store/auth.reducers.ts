@@ -1,4 +1,4 @@
-import { State } from 'app/auth/store/state.interface';
+import { State } from '../../auth/store/state.interface';
 import * as AuthActions from './auth.actions';
 
 const initAuth: State = {

@@ -5,8 +5,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/withLatestFrom';
 import * as fromRecipeActions from './recipe.actions';
 import { HttpClient, HttpRequest } from '@angular/common/http';
-import { Recipe } from 'app/shared/recipe.model';
-import { RecipeState } from 'app/recipes/store/state.interface';
+import { Recipe } from '../../shared/recipe.model';
+import { RecipeState } from '../../recipes/store/state.interface';
 
 @Injectable()
 export class RecipeEffects {
@@ -17,13 +17,12 @@ export class RecipeEffects {
         .ofType(fromRecipeActions.FETCH_RECIPES)
         .switchMap((action: fromRecipeActions.FetchRecipes) => {
             return this.httpClient.get<Recipe[]>(this.baseApiUrl);
-        })
-        .map(recipes => {
+        }).map(recipes => {
             return {
                 type: fromRecipeActions.SET_RECIPES,
                 payload: recipes
             };
-        });
+        }).take(1);
     @Effect({ dispatch: false })
     recipeSave = this.actions$
         .ofType(fromRecipeActions.SAVE_RECIPES)

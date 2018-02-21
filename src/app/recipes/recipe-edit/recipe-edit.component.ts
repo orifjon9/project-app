@@ -3,8 +3,8 @@ import { ActivatedRoute, Params, Router } from "@angular/router";
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-import { Recipe } from 'app/shared/recipe.model';
-import { RecipeState } from 'app/recipes/store/state.interface';
+import { Recipe } from '../../shared/recipe.model';
+import { RecipeState } from '../../recipes/store/state.interface';
 import * as fromRecipeActions from '../store/recipe.actions';
 
 @Component({

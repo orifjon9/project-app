@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { NgForm } from '@angular/forms';
-import { AppState } from 'app/store/app.reducers';
+import { AppState } from '../../store/app.reducers';
 
 import * as fromAuthActions from '../store/auth.actions';
 @Component({

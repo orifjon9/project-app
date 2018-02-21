@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import * as ShoppingListActions from './store/shopping-list.actions';
-import { AppState } from 'app/store/app.reducers';
+import { AppState } from '../store/app.reducers';
 
 @Component({
   selector: 'app-shopping-list',

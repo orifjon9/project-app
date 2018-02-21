@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { HomeComponent } from 'app/core/home/home.component';
-import { HeaderComponent } from 'app/core/header/header.component';
-import { AppRoutingModule } from 'app/app-routing.module';
-import { SharedModule } from 'app/shared/shared.module';
-import { LoggingService } from 'app/services/logging.service';
-import { AuthGuard } from 'app/auth/auth-guard';
-import { AuthInterceptor } from 'app/shared/auth.interceptor';
-import { LoggingInterceptor } from 'app/shared/logging.interceptor';
+import { HomeComponent } from '../core/home/home.component';
+import { HeaderComponent } from '../core/header/header.component';
+import { AppRoutingModule } from '../app-routing.module';
+import { SharedModule } from '../shared/shared.module';
+import { LoggingService } from '../services/logging.service';
+import { AuthGuard } from '../auth/auth-guard';
+import { AuthInterceptor } from '../shared/auth.interceptor';
+import { LoggingInterceptor } from '../shared/logging.interceptor';
 
 
 @NgModule({

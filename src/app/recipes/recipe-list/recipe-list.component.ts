@@ -3,9 +3,8 @@ import { Store } from '@ngrx/store';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 
-import { Recipe } from 'app/shared/recipe.model';
-import { RecipeState, State } from 'app/recipes/store/state.interface';
-
+import { Recipe } from '../../shared/recipe.model';
+import { RecipeState, State } from '../../recipes/store/state.interface';
 
 @Component({
   selector: 'app-recipe-list',

@@ -4,8 +4,8 @@ import { Store } from '@ngrx/store';
 
 import { Recipe } from "../../shared/recipe.model";
 import * as ShoppingListActions from '../../shopping-list/store/shopping-list.actions';
-import { Ingredient } from 'app/shared/ingredient.model';
-import { RecipeState } from 'app/recipes/store/state.interface';
+import { Ingredient } from '../../shared/ingredient.model';
+import { RecipeState } from '../../recipes/store/state.interface';
 import { Observable } from 'rxjs/Observable';
 import * as fromRecipeState from '../store/state.interface';
 import * as fromRecipeActions from '../store/recipe.actions';

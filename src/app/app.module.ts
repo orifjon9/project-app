@@ -10,14 +10,14 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { AppComponent } from './app.component';
 import { DropDownDirective } from './shared/dropdown.directive';
 import { AppRoutingModule } from './app-routing.module';
-import { RecipesModule } from 'app/recipes/recipes.module';
-import { SharedModule } from 'app/shared/shared.module';
-import { ShoppingListModule } from 'app/shopping-list/shopping-list.module';
-import { AuthModule } from 'app/auth/auth.module';
-import { CoreModule } from 'app/core/core.module';
-import { shoppingListReducer } from 'app/shopping-list/store/shopping-list.reducers';
-import { reducers } from 'app/store/app.reducers';
-import { AuthEffects } from 'app/auth/auth.effects';
+import { RecipesModule } from './recipes/recipes.module';
+import { SharedModule } from './shared/shared.module';
+import { ShoppingListModule } from './shopping-list/shopping-list.module';
+import { AuthModule } from './auth/auth.module';
+import { CoreModule } from './core/core.module';
+import { shoppingListReducer } from './shopping-list/store/shopping-list.reducers';
+import { reducers } from './store/app.reducers';
+import { AuthEffects } from './auth/auth.effects';
 import { environment } from '../environments/environment';
 
 @NgModule({

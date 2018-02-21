@@ -6,8 +6,8 @@ import { Store } from '@ngrx/store';
 import 'rxjs/add/operator/switchMap';
 import 'rxjs/add/operator/take';
 
-import * as fromApp from 'app/store/app.reducers';
-import * as fromAuth from 'app/auth/store/state.interface';
+import * as fromApp from '../store/app.reducers';
+import * as fromAuth from '../auth/store/state.interface';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
     constructor(private store: Store<fromApp.AppState>) { }

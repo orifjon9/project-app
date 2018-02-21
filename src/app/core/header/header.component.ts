@@ -4,10 +4,10 @@ import { Subscription } from 'rxjs/Subscription';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
-import { Ingredient } from 'app/shared/ingredient.model';
-import { AppState } from 'app/store/app.reducers';
-import * as fromAuth from 'app/auth/store/state.interface';
-import * as fromAuthActions from 'app/auth/store/auth.actions';
+import { Ingredient } from '../../shared/ingredient.model';
+import { AppState } from '../../store/app.reducers';
+import * as fromAuth from '../../auth/store/state.interface';
+import * as fromAuthActions from '../../auth/store/auth.actions';
 import * as fromRecipeActions from '../../recipes/store/recipe.actions';
 
 @Component({

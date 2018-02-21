@@ -3,8 +3,8 @@ import { Observable } from 'rxjs/Observable';
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 
-import * as fromApp from 'app/store/app.reducers';
-import * as fromAuthState from 'app/auth/store/state.interface';
+import * as fromApp from '../store/app.reducers';
+import * as fromAuthState from '../auth/store/state.interface';
 
 @Injectable()
 export class AuthGuard implements CanActivate, CanActivateChild {

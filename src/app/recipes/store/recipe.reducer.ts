@@ -1,7 +1,7 @@
-import { State } from "app/recipes/store/state.interface";
+import { State } from '../../recipes/store/state.interface';
 import * as fromRecipeActions from './recipe.actions';
-import { Recipe } from "app/shared/recipe.model";
-import { Ingredient } from "app/shared/ingredient.model";
+import { Recipe } from '../../shared/recipe.model';
+import { Ingredient } from '../../shared/ingredient.model';
 
 export const initState: State = {
     recipes: [
@@ -13,6 +13,7 @@ export const initState: State = {
 export function recipeReducers(state = initState, action: fromRecipeActions.RecipeActions) {
     switch (action.type) {
         case fromRecipeActions.SET_RECIPES: {
+            console.log('set recipes');
             return {
                 ...state,
                 recipes: [...action.payload]

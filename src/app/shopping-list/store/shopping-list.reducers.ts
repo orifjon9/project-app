@@ -1,6 +1,6 @@
 import * as ShoppingListActions from './shopping-list.actions';
 
-import { Ingredient } from 'app/shared/ingredient.model';
+import { Ingredient } from '../../shared/ingredient.model';
 import { State } from './state.interface';
 
 const initialState: State = {
