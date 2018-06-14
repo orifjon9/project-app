@@ -9,6 +9,7 @@ import { AppState } from '../../store/app.reducers';
 import * as fromAuth from '../../auth/store/state.interface';
 import * as fromAuthActions from '../../auth/store/auth.actions';
 import * as fromRecipeActions from '../../recipes/store/recipe.actions';
+import * as fromIngredientReducer from '../../shopping-list/store/shopping-list.reducers';
 
 @Component({
   selector: 'app-header',
@@ -24,9 +25,9 @@ export class HeaderComponent implements OnInit, OnDestroy {
               private router: Router) { }
 
   ngOnInit() {
-    this.subscription = this.store.select('shoppingList')
+    this.store.select(fromIngredientReducer.selectTotalIngredients)
       .subscribe(
-      data => this.numberIngredients = data.ingredients.length);
+      data => this.numberIngredients = data);
       this.authState = this.store.select('auth');
   }
 

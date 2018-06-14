@@ -29,7 +29,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
       .subscribe(data => {
         if (data.editedIngredient != null) {
           this.editMode = true;
-          this.slForm.setValue({ name: data.editedIngredient.name, amount: data.editedIngredient.amount });
+          this.slForm.setValue({ id: data.editedIngredient.id, name: data.editedIngredient.name, amount: data.editedIngredient.amount });
         }
       });
   }
@@ -40,7 +40,7 @@ export class ShoppingEditComponent implements OnInit, OnDestroy {
   }
 
   onAddOrUpdateIngredient(form: NgForm) {
-    const ing = new Ingredient(form.value.name, form.value.amount);
+    const ing = new Ingredient(form.value.id, form.value.name, form.value.amount);
     if (this.editMode) {
       this.store.dispatch(new ShoppingListActions.UpdateIngredient({ ingredient: ing }));
     } else {

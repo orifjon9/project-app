@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 import * as ShoppingListActions from './store/shopping-list.actions';
+import * as fromShoppingListReducer from './store/shopping-list.reducers';
 import { AppState } from '../store/app.reducers';
 
 @Component({
@@ -13,12 +14,12 @@ import { AppState } from '../store/app.reducers';
 })
 
 export class ShoppingListComponent implements OnInit {
-  shoppingListState: Observable<{ ingredients: Ingredient[] }>;
+  shoppingList$: Observable<Ingredient[]>;
 
   constructor(private store: Store<AppState>) { }
 
   ngOnInit() {
-    this.shoppingListState = this.store.select('shoppingList');
+    this.shoppingList$ = this.store.select(fromShoppingListReducer.selectAllIngredients);
   }
 
   editIngredient(index: number) {

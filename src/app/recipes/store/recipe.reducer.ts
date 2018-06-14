@@ -6,7 +6,7 @@ import { Ingredient } from '../../shared/ingredient.model';
 export const initState: State = {
     recipes: [
         new Recipe('Test1', 'tedtd detet etded', 'http://juliandance.org/wp-content/uploads/2016/01/RedApple.jpg',
-            [new Ingredient('onion', 4)])
+            [new Ingredient(5, 'onion', 4)])
     ]
 };
 

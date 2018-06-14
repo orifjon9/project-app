@@ -1,11 +1,8 @@
-import { Routes } from "@angular/router";
-import { RouterModule } from "@angular/router";
-import { NgModule } from "@angular/core";
-
-import { ShoppingListComponent } from "app/shopping-list/shopping-list.component";
-import { AuthGuard } from "app/auth/auth-guard";
-import { ShoppingEditComponent } from "app/shopping-list/shopping-edit/shopping-edit.component";
-
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from '../auth/auth-guard';
+import { ShoppingEditComponent } from './shopping-edit/shopping-edit.component';
+import { ShoppingListComponent } from './shopping-list.component';
 
 const shoppingListRoutes: Routes = [
     {
